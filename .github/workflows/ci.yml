@@ -33,7 +33,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t smartpipeline-ai:ci .
 
-publish:
+  publish:
     needs: test-and-build
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
