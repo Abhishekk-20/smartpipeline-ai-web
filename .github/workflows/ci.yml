@@ -35,14 +35,6 @@ jobs:
           python -m pytest -v 2>&1 | tee pytest.log
 
 
-
-      - name: Temporary diagnostic test
-        run: |
-          echo "ERROR: PostgreSQL connection to db:5432 refused"
-          exit 1
-
-
-
       - name: Build Docker image
         id: docker_build
         if: steps.tests.outcome == 'success'
