@@ -57,6 +57,11 @@ def safe_log(text):
             r"\1\2[REDACTED]",
         ),
         (r"\bAKIA[0-9A-Z]{16}\b", "[REDACTED_AWS_ACCESS_KEY]"),
+        (
+            r"\b(?:gh[pousr]_[A-Za-z0-9_]{20,}|"
+            r"github_pat_[A-Za-z0-9_]{20,}|gsk_[A-Za-z0-9_]{20,})\b",
+            "[REDACTED_TOKEN]",
+        ),
     ]
     for pattern, replacement in patterns:
         text = re.sub(pattern, replacement, text)
