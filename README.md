@@ -103,33 +103,47 @@ flowchart LR
     F --> G[Open localhost:5000]
 ```
 
-## Optional LLM setup
+## Use Groq API locally
 
-The local heuristic analyzer and risk scoring work without an LLM provider. To use an OpenAI-compatible local endpoint, for example Ollama, start Ollama and pull a model:
+This project uses Groq's OpenAI-compatible API for hosted LLM diagnosis. Create a Groq API key in your Groq Console, then set it as an environment variable. **Never paste the key into source code, README files, screenshots, or Git commits.**
+
+### Linux / macOS
+
+```bash
+export LLM_BASE_URL="https://api.groq.com/openai/v1"
+export LLM_MODEL="openai/gpt-oss-20b"
+export LLM_API_KEY="YOUR_GROQ_API_KEY"
+python app.py
+```
+
+### Windows PowerShell
+
+```powershell
+$env:LLM_BASE_URL = "https://api.groq.com/openai/v1"
+$env:LLM_MODEL = "openai/gpt-oss-20b"
+$env:LLM_API_KEY = "YOUR_GROQ_API_KEY"
+python app.py
+```
+
+Replace `YOUR_GROQ_API_KEY` in your terminal command with your own key. Do not commit the key. The model name above matches the model configured in this project's CI diagnosis workflow; model availability can change, so check your Groq account if the request returns a model or quota error.
+
+For **GitHub Actions CI failure diagnosis**, add a repository secret named `GROQ_API_KEY` under **Settings → Secrets and variables → Actions**. This workflow secret is separate from the local app's `LLM_API_KEY` environment variable.
+
+If Groq is not configured or the request fails, the app may fall back to its local heuristic report, depending on the endpoint and error path. AI output is advisory; verify it against the original logs.
+
+### Optional: local Ollama
+
+If you prefer to run a local OpenAI-compatible endpoint instead of Groq, start Ollama and pull a model:
 
 ```bash
 ollama pull llama3.2:3b
-```
-
-Then, in the same terminal where you start the app:
-
-```bash
-export LLM_BASE_URL=http://localhost:11434/v1
-export LLM_MODEL=llama3.2:3b
-export LLM_API_KEY=ollama
+export LLM_BASE_URL="http://localhost:11434/v1"
+export LLM_MODEL="llama3.2:3b"
+export LLM_API_KEY="ollama"
 python app.py
 ```
 
-For Windows PowerShell, use:
-
-```powershell
-$env:LLM_BASE_URL = "http://localhost:11434/v1"
-$env:LLM_MODEL = "llama3.2:3b"
-$env:LLM_API_KEY = "ollama"
-python app.py
-```
-
-These are example local Ollama settings. Other OpenAI-compatible providers may require a different base URL, model name, and API key. Keep credentials in environment variables or a secret manager; never commit them.
+These are example Ollama settings. Keep credentials in environment variables or a secret manager; never commit them.
 
 ## Run with Docker
 
