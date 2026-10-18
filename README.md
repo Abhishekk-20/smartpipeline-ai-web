@@ -12,6 +12,12 @@ AI-assisted DevOps toolkit for CI/CD log diagnosis, change-risk scoring, and pul
 - **Secret redaction:** removes several common credential patterns before log analysis. Redaction is best-effort; never submit real secrets.
 - **Automated checks:** runs pytest and a Docker build in GitHub Actions. On CI failure, the workflow can request a Groq diagnosis and add it to the Actions summary.
 
+## Application screenshot
+
+The SmartPipeline AI dashboard brings the main tools into one workspace: log analysis, change-risk scoring, and AI-assisted code review.
+
+![SmartPipeline AI dashboard](docs/images/smartpipeline-dashboard.png)
+
 ## Architecture
 
 ```mermaid
