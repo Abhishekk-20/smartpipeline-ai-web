@@ -115,6 +115,13 @@ jobs:
                                   "a targeted fix only when supported by evidence. "
                                   "Never recommend exposing secrets or running destructive commands. "
                                   "Never repeat credentials or tokens found in logs. "
+                                  "Format the report using concise Markdown headings and bullet points. "
+                                  "Put each verification command in its own fenced code block, with no "
+                                  "comments or unrelated text on the same line as the command. "
+                                  "Commands must be syntactically valid and appropriate for the observed "
+                                  "failure. Do not suggest placeholder tests such as assert True. "
+                                  "Do not recommend removing a test unless evidence supports that it is "
+                                  "temporary or incorrectly written. "
                                   "Your diagnosis is advisory, not proof of root cause."
                                 ),
                               },
